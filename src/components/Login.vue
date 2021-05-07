@@ -5,28 +5,101 @@
         <img src="../assets/logo.png" alt="" />
       </div>
       <!-- 登录表单 -->
-      <el-form label-width="0px" class="login_form">
+      <el-form
+        :rules="loginFormRules"
+        :model="loginForm"
+        label-width="0px"
+        class="login_form"
+        ref="loginFormRef"
+      >
         <!-- 用户名 -->
-        <el-form-item>
-          <el-input prefix-icon="iconfont icon-user"></el-input>
+        <el-form-item prop="username">
+          <el-input
+            v-model="loginForm.username"
+            prefix-icon="iconfont icon-user"
+          ></el-input>
         </el-form-item>
         <!-- 密码 -->
-        <el-form-item>
-          <el-input prefix-icon="iconfont icon-3702mima"></el-input>
+        <el-form-item prop="password">
+          <el-input
+            v-model="loginForm.password"
+            prefix-icon="iconfont icon-3702mima"
+            type="password"
+          ></el-input>
         </el-form-item>
         <!-- 按钮区域 -->
         <el-form-item class="btns">
-          <el-button type="primary">登录</el-button>
-          <el-button type="info">注册</el-button>
+          <el-button type="primary" @click="login">登录</el-button>
+          <el-button type="info" @click="resetLoginForm">重置</el-button>
         </el-form-item>
       </el-form>
     </div>
   </div>
 </template>
 
+
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      //这是登录表单的数据绑定
+      loginForm: {
+        username: "admin",
+        password: "123456",
+      },
+      loginFormRules: {
+        //这是表单验证规则
+        //验证用户名
+        username: [
+          { required: true, message: "请输入登录名称", trigger: "blur" },
+          {
+            min: 3,
+            max: 10,
+            message: "长度在 3 到 10 个字符",
+            trigger: "blur",
+          },
+        ],
+        //验证密码
+        password: [
+          { required: true, message: "请输入登录密码", trigger: "blur" },
+          {
+            min: 6,
+            max: 12,
+            message: "长度在 6 到 12 个字符",
+            trigger: "blur",
+          },
+        ],
+      },
+    };
+  },
+  methods: {
+    resetLoginForm() {
+      this.$refs.loginFormRef.resetFields();
+    },
+    login() {
+      this.$refs.loginFormRef.validate(async (valid) => {
+        if (!valid) return;
+        const { data: res } = await this.$http.post("login", this.loginForm);
+        if (res.meta.status !== 200) {
+          return this.$message.error("登陆失败");
+        }
+        this.$message.success("登陆成功");
+        //1、将登录超过之后的token，保存到客户端的sessionStorage中
+        //2、项目中除了登陆之外的其他API接口，必须再登陆之后才能访问
+        //3、token在当前网站打开期间生效，所以将token保存到sessionStorage中
+        console.log(res);
+        //4、通过变成是导航跳转到后台主页，路由地址是/home
+        window.sessionStorage.setItem("token", res.data.token);
+        this.$router.push("/home");
+        
+      });
+    },
+  },
+};
 </script>
+
+
+
 
 <style lang="scss" scoped>
 .login_container {
@@ -62,16 +135,15 @@ export default {};
     }
   }
 }
-.login_form{
+.login_form {
   position: absolute;
-  bottom:0;
+  bottom: 0;
   width: 100%;
   padding: 0 20px;
   box-sizing: border-box;
 }
-.btns{
+.btns {
   display: flex;
   justify-content: flex-end;
 }
-
 </style>
