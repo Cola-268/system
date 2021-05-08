@@ -87,7 +87,7 @@ export default {
         //1、将登录超过之后的token，保存到客户端的sessionStorage中
         //2、项目中除了登陆之外的其他API接口，必须再登陆之后才能访问
         //3、token在当前网站打开期间生效，所以将token保存到sessionStorage中
-        console.log(res);
+       
         //4、通过变成是导航跳转到后台主页，路由地址是/home
         window.sessionStorage.setItem("token", res.data.token);
         this.$router.push("/home");
