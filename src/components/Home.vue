@@ -38,7 +38,7 @@
               :index="'/' + item.path"
               v-for="item in item.children"
               :key="item.id"
-              @click="saveNavState(item.path)"
+              @click="saveNavState('/' + item.path)"
             >
               <template slot="title">
                 <!-- 二级菜单模板区 -->
