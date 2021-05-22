@@ -92,6 +92,7 @@
       >
       </el-pagination>
     </el-card>
+    
     <!-- 添加用户的对话框 -->
     <el-dialog
       title="添加用户"
@@ -452,7 +453,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-p {
-  margin-top: 15px;
+p{
+ margin-top: 15px;
 }
 </style>
