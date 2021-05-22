@@ -1,5 +1,5 @@
 {
-  "name": "moive",
+  "name": "system",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -12,6 +12,7 @@
     "element-ui": "^2.15.1",
     "vue": "^2.6.11",
     "vue-router": "^3.2.0",
+    "vue-table-with-tree-grid": "^0.2.4",
     "vuex": "^3.4.0"
   },
   "devDependencies": {
@@ -24,5 +25,14 @@
     "sass-loader": "^8.0.2",
     "vue-cli-plugin-element": "^1.0.1",
     "vue-template-compiler": "^2.6.11"
-  }
+  },
+  "description": "## Project setup ``` npm install ```",
+  "main": "babel.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git@gitee.com:a2681035666/system.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
