@@ -220,7 +220,7 @@ export default {
         query: "",
         //当前的页码
         pagenum: 1,
-        //当前煤业显示多少条数据
+        //当前每页显示多少条数据
         pagesize: 5,
       },
       userlist: [],

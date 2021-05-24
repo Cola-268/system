@@ -88,3 +88,13 @@ img {
 .el-cascader-panel {
     height: 400px;
 }
+.el-steps{
+    margin: 15px 0;
+}
+.el-step__title{
+    font-size: 14px;
+}
+/* 富文本最低高度 */
+.ql-editor{
+    min-height: 310px;
+}
